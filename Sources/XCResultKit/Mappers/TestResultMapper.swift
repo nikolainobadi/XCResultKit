@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  TestResultMapper.swift
 //  
 //
 //  Created by Nikolai Nobadi on 6/14/24.
@@ -25,15 +25,16 @@ private extension TestResultMapper {
             return []
         }
         
-        let groupedSummaries = Dictionary(grouping: summaries.values, by: { $0.testCaseName.value })
-        
-        return groupedSummaries.map { (testCaseName, values) -> FailedTestCase in
-            let details = values.compactMap { summary -> ErrorDetails? in
-                let lineNumber = summary.lineNumber
-                return ErrorDetails(message: summary.message.value, lineNumber: lineNumber)
+        return Dictionary(grouping: summaries.values, by: { $0.testCaseName.value })
+            .map { (textCaseName, summaries) in
+                let errorDetails = makeErrorDetails(summaries: summaries)
+                
+                return .init(testCaseName: textCaseName, details: errorDetails)
             }
-            return FailedTestCase(testCaseName: testCaseName, details: details)
-        }
+    }
+    
+    static func makeErrorDetails(summaries: [FailureSummaryValue]) -> [ErrorDetails] {
+        return summaries.compactMap({ .init(message: $0.message.value, lineNumber: $0.lineNumber) })
     }
 }
 
@@ -41,15 +42,8 @@ private extension TestResultMapper {
 // MARK: - Extension Dependencies
 fileprivate extension FailureSummaryValue {
     var lineNumber: String? {
-        guard let line = extractLineNumbers(from: documentLocationInCreatingWorkspace.url.value).startingLine else { return nil }
-
-        return "\(line + 1)"
-    }
-    private func extractLineNumbers(from urlString: String) -> (startingLine: Int?, endingLine: Int?) {
-        guard let url = URL(string: urlString),
-              let query = url.fragment else {
-            print("Invalid URL")
-            return (nil, nil)
+        guard let url = URL(string: documentLocationInCreatingWorkspace.url.value), let query = url.fragment else {
+            return nil
         }
 
         let parameters = query.components(separatedBy: "&").reduce(into: [String: String]()) { (result, param) in
@@ -59,9 +53,10 @@ fileprivate extension FailureSummaryValue {
             }
         }
 
-        let startingLine = parameters["StartingLineNumber"].flatMap(Int.init)
-        let endingLine = parameters["EndingLineNumber"].flatMap(Int.init)
+        guard let line = parameters["StartingLineNumber"].flatMap(Int.init) else {
+            return nil
+        }
 
-        return (startingLine, endingLine)
+        return "\(line + 1)"
     }
 }
