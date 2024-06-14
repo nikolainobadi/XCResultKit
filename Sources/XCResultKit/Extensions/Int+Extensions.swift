@@ -5,7 +5,7 @@
 //  Created by Nikolai Nobadi on 6/14/24.
 //
 
-extension Int {
+public extension Int {
     var formattedString: String {
         let interval = self
         let seconds = interval % 60
