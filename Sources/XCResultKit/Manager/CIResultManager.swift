@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CIResultManager.swift
 //  
 //
 //  Created by Nikolai Nobadi on 6/14/24.
