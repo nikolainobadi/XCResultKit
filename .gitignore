@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Xcode
+## Build generated
+build/
+DerivedData/
+
+## User-specific
+xcuserdata/
+
+# Swift Package Manager
+Packages/
+.swiftpm/
+.build/
+
+# Firebase
+firestore-debug.log
+
+# Other
+serviceKey/
+node_modules/
+CIPipeKit/TestResults
