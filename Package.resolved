@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "files",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JohnSundell/Files.git",
+      "state" : {
+        "revision" : "d273b5b7025d386feef79ef6bad7de762e106eaf",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "nnconfiggenkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nikolainobadi/NnConfigGenKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3b98c10a200894f3b3d2495cc1217f3527aec323"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
+      "state" : {
+        "revision" : "6b2aa2748a7881eebb9f84fb10c01293e15b52ca",
+        "version" : "0.5.0"
+      }
+    },
+    {
+      "identity" : "swiftshell",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kareman/SwiftShell.git",
+      "state" : {
+        "revision" : "99680b2efc7c7dbcace1da0b3979d266f02e213c",
+        "version" : "5.1.0"
+      }
+    }
+  ],
+  "version" : 2
+}
