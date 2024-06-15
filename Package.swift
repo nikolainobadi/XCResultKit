@@ -12,27 +12,28 @@ let package = Package(
         .library(
             name: "XCResultKit",
             targets: ["XCResultKit"]
-        ),
-        .executable(
-            name: "XCResultKitExecutable",
-            targets: ["XCResultKitExecutable"]
-        ),
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/kareman/SwiftShell", from: "5.1.0"),
-        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "0.3.0"),
+        .package(url: "https://github.com/nikolainobadi/NnTestKit", branch: "main")
     ],
     targets: [
         .target(
             name: "XCResultKit",
             dependencies: [
-                "SwiftShell",
-                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                "SwiftShell"
             ]
         ),
-        .executableTarget(
-            name: "XCResultKitExecutable",
-            dependencies: ["XCResultKit"]
-        ),
+        .testTarget(
+            name: "XCResultTests",
+            dependencies: [
+                "XCResultKit",
+                .product(name: "NnTestHelpers", package: "NnTestKit")
+            ],
+            resources: [
+                .copy("Resources")
+            ]
+        )
     ]
 )

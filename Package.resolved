@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "swift-argument-parser",
+      "identity" : "nntestkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser.git",
+      "location" : "https://github.com/nikolainobadi/NnTestKit",
       "state" : {
-        "revision" : "6b2aa2748a7881eebb9f84fb10c01293e15b52ca",
-        "version" : "0.5.0"
+        "branch" : "main",
+        "revision" : "1a0c8c441ce211c477ee6121442d0d5f419d0686"
       }
     },
     {
