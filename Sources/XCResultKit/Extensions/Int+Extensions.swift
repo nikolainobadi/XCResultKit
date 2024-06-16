@@ -1,10 +1,11 @@
 //
 //  Int+Extensions.swift
-//  
+//
 //
 //  Created by Nikolai Nobadi on 6/14/24.
 //
 
+/// Extension to format an `Int` representing a time interval into a readable string.
 public extension Int {
     var formattedString: String {
         let interval = self
@@ -21,3 +22,4 @@ public extension Int {
         }
     }
 }
+

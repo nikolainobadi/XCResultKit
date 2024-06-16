@@ -52,18 +52,3 @@ extension String {
         return dateFormatter.date(from: self)
     }
 }
-extension ActionValue {
-    var name: String {
-        let titleValue = title.value
-        
-        if titleValue.contains("Clean") {
-            return "Clean"
-        }
-        
-        if titleValue.contains("Build") {
-            return "Build"
-        }
-        
-        return "Test"
-    }
-}
