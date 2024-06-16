@@ -1,6 +1,8 @@
 
 # XCResultKit
 
+![](https://badgen.net/badge/platform/macos?list=|&color=grey)
+![](https://badgen.net/badge/distro/SPM%20only?color=red)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
