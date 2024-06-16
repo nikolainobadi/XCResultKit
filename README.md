@@ -83,7 +83,7 @@ Inline documentation is provided within the source code for detailed explanation
 
 ## Contributing
 
-I am open to contributions! If you have ideas, enhancements, or bug fixes, feel free to open an issue or submit a pull request. Please ensure that your code adheres to the existing coding standards and includes appropriate documentation and tests.
+I am open to contributions! If you have ideas, enhancements, or bug fixes, feel free to [open an issue](https://github.com/nikolainobadi/XCResultKit/issues/new). Please ensure that your code adheres to the existing coding standards and includes appropriate documentation and tests.
 
 ## License
 
