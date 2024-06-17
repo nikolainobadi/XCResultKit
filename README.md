@@ -92,7 +92,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Future Plans
 
 I plan to expand XCResultKit to include more detailed information about code coverage in future releases. Stay tuned for updates!
-
-## Contact
-
-Feel free to reach out if you have any questions or need further assistance. You can contact me via [GitHub](https://github.com/nikolainobadi).
