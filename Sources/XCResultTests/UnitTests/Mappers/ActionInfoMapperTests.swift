@@ -10,7 +10,7 @@ import NnTestHelpers
 @testable import XCResultKit
 
 final class ActionInfoMapperTests: XCTestCase {
-    func test_makeActionInfo_typeIsCorrect() {
+    func test_creates_action_info_with_correct_type() {
         let sut = makeSUT()
         
         ActionValueTitle.allCases.forEach { title in
@@ -21,12 +21,12 @@ final class ActionInfoMapperTests: XCTestCase {
         }
     }
     
-    func test_makeActionInfo_didSucceedIsCorrect() {
+    func test_creates_action_info_with_correct_success_status() {
         XCTAssert(makeSUT().makeActionInfo(from: makeActionValue(title: .buildTitle)).didSucceed)
         XCTAssertFalse(makeSUT().makeActionInfo(from: makeActionValue(title: .buildTitle, status: "")).didSucceed)
     }
     
-    func test_makeActionInfo_timeIntervalIsCorrect() {
+    func test_creates_action_info_with_correct_time_interval() {
         let start = Date().toCustomString(withHour: 8, minute: 0, second: 0, millisecond: 0)
         let end = Date().toCustomString(withHour: 8, minute: 5, second: 0, millisecond: 0)
         let value = makeActionValue(title: .buildTitle, endedTime: end, startedTime: start)
@@ -37,16 +37,12 @@ final class ActionInfoMapperTests: XCTestCase {
     }
 }
 
-
 // MARK: - SUT
 extension ActionInfoMapperTests {
     func makeSUT() -> ActionInfoMapper.Type {
         return ActionInfoMapper.self
     }
-    
-    
 }
-
 
 // MARK: - Extension Dependencies
 extension Date {
@@ -70,4 +66,3 @@ extension Date {
         return formatter.string(from: customDate)
     }
 }
-

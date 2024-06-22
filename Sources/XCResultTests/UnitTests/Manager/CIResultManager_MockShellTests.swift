@@ -9,29 +9,28 @@ import XCTest
 @testable import XCResultKit
 
 final class CIResultManager_MockShellTests: XCTestCase {
-    func test_mockShell_outputIsValid() throws {
+    func test_mockShell_outputs_valid_results_for_all_file_cases() throws {
         MockShell.FileName.allCases.forEach {
             XCTAssertFalse(MockShell(fileName: $0).runCommand("").isEmpty)
         }
     }
 }
 
-
 // MARK: - Unit Tests
 extension CIResultManager_MockShellTests {
-    func test_extractResults_passingAndFailingJSON_notNil() {
+    func test_returns_non_nil_for_all_test_JSON_files() {
         MockShell.FileName.filesWithTests.forEach {
             XCTAssertNotNil(makeSUT(fileName: $0).extractResults(xcresultPath: ""))
         }
     }
     
-    func test_extractResults_cleanAndBuildOnly_actionsAreCorrect() {
+    func test_clean_and_build_only_contains_two_actions() {
         let result = makeSUT(fileName: .cleanAndBuildOnly).extractResults(xcresultPath: "")
         
         assertPropertyEquality(result?.actions.count, expectedProperty: 2)
     }
     
-    func test_extractResults_cleanAndBuildOnly_noTestResults() {
+    func test_clean_and_build_has_no_test_results() {
         let result = makeSUT(fileName: .cleanAndBuildOnly).extractResults(xcresultPath: "")
         
         assertProperty(result) { ciResult in
@@ -39,7 +38,7 @@ extension CIResultManager_MockShellTests {
         }
     }
     
-    func test_extractResults_passingAndFailingJSON_actionsAreCorrect() {
+    func test_passing_and_failing_tests_contain_three_actions() {
         MockShell.FileName.filesWithTests.forEach {
             let result = makeSUT(fileName: $0).extractResults(xcresultPath: "")
             
@@ -47,13 +46,13 @@ extension CIResultManager_MockShellTests {
         }
     }
     
-    func test_extractResults_passingJSON_noFailedTestDetails() {
+    func test_passing_tests_have_no_failed_test_details() {
         let result = makeSUT().extractResults(xcresultPath: "")
         
         assertPropertyEquality(result?.testResult?.failedTestDetails.count, expectedProperty: 0)
     }
     
-    func test_extractResults_failingJSON_noFailedTestDetails() {
+    func test_failing_tests_have_failed_test_details() {
         let result = makeSUT(fileName: .failure).extractResults(xcresultPath: "")
         
         assertProperty(result?.testResult) { testResults in
@@ -61,7 +60,6 @@ extension CIResultManager_MockShellTests {
         }
     }
 }
-
 
 // MARK: - SUT
 extension CIResultManager_MockShellTests {
@@ -84,7 +82,6 @@ extension CIResultManager_MockShellTests {
                 return [.passing, .failure]
             }
         }
-        
         
         init(fileName: FileName) {
             self.fileName = fileName

@@ -10,11 +10,11 @@ import NnTestHelpers
 @testable import XCResultKit
 
 final class TestResultMapperTests: XCTestCase {
-    func test_makeTestResult_returnsNil_whenTestCountIsNil() {
+    func test_returns_nil_when_test_count_is_nil() {
         XCTAssertNil(makeSUT().makeTestResult(makeJSON()))
     }
     
-    func test_makeTestResult_testPlanNameIsNil_whenTestActionIsMissing() {
+    func test_test_plan_name_is_nil_when_test_action_is_missing() {
         let metrics = makeMetrics(testCount: "1")
         let json = makeJSON(metrics: metrics)
         let result = makeSUT().makeTestResult(json)
@@ -24,7 +24,7 @@ final class TestResultMapperTests: XCTestCase {
         }
     }
     
-    func test_makeTestResult_failureDetailsIsEmpty_whenIssuesIsNil() {
+    func test_failure_details_are_empty_when_issues_are_nil() {
         let issues = makeIssues(summary: makeTestFailureSummary())
         let metrics = makeMetrics(testCount: "1")
         let json = makeJSON(issues: issues, metrics: metrics)
@@ -33,7 +33,7 @@ final class TestResultMapperTests: XCTestCase {
         assertPropertyEquality(results?.failedTestDetails.count, expectedProperty: 0)
     }
     
-    func test_makeTestResult_errorsWithinSameMethod_areSavedInSingleFailedTestDetails() {
+    func test_errors_within_same_method_are_grouped_in_single_failed_test_details() {
         let firstMethodName = "test_firstMethod()"
         let secondMethodName = "test_otherMethod()"
         let firstError = makeFailureValue(testCaseName: firstMethodName, lineNumber: 20)
@@ -56,7 +56,6 @@ final class TestResultMapperTests: XCTestCase {
         assertPropertyEquality(results?.failedTestDetails.first(where: { $0.testCaseName == firstMethodName })?.details.count, expectedProperty: 2)
     }
 }
-
 
 // MARK: - SUT
 extension TestResultMapperTests {
